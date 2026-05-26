@@ -1,0 +1,52 @@
+@use "/src/assets/styles/mixins" as *;
+
+.user-profile {
+  @include flex-center(flex-start, center);
+  gap: var(--spacing-xl);
+  transition: width 1s;
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background-color: var(--utility-brand-100);
+    @include flex-center(center, center);
+    border-radius: 100%;
+    @include text-style(text-brand-tertiary-alt, text-lg, 600, text-lg);
+  }
+
+  &__details {
+    @include flex-center(flex-start, flex-start);
+    flex-direction: column;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 0;
+    h4 {
+      @include text-style(text-secondary-700, text-sm, 600, text-sm);
+    }
+    p {
+      @include text-style(text-tertiary-600, text-sm, 500, text-sm);
+    }
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+
+    &-expanded {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.5s ease, visibility 0s;
+    }
+  }
+
+  &__signout {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+
+    &-expanded {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.5s ease, visibility 0s;
+    }
+  }
+}

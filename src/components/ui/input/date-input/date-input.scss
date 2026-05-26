@@ -1,0 +1,102 @@
+@use "/src/assets/styles/mixins" as *;
+
+.date-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  &__label {
+    width: 100%;
+    text-align: start;
+    font-size: var(--font-size-text-sm);
+    color: var(--text-primary-900);
+  }
+  &__required {
+    color: var(--color-error, #e53935);
+    font-size: 14px;
+    line-height: 1;
+  }
+  .custom-date-input {
+    position: relative;
+    width: 100%;
+    input {
+      width: 100%;
+      height: 40px;
+      padding: 10px var(--spacing-md) 10px var(--spacing-4xl);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-primary);
+      color: var(--text-tertiary-600);
+      @include text-style(text-secondary-700, text-md, 400, text-md);
+      background: var(--bg-primary);
+
+      &::placeholder {
+        @include text-style(text-placeholder, text-md, 400, text-md);
+      }
+    }
+    svg {
+      position: absolute;
+      left: 8px;
+      top: 9px;
+    }
+    .date-clear-button {
+      background: none;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-60%);
+    }
+  }
+  &__error {
+    @include text-style(text-error-primary-600, text-sm, 400, text-sm);
+  }
+}
+.custom-date-input.has-error input {
+  border-color: var(--border-error) !important;
+  background-color: var(--bg-error-light);
+}
+.date-picker-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.date-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+
+  &.secondary {
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+  }
+
+  &.primary {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+  }
+}
+.bg-dark.rmdp-wrapper,
+.bg-dark .rmdp-month-picker,
+.bg-dark .rmdp-year-picker,
+.bg-dark .rmdp-time-picker div input,
+.rmdp-container .bg-dark.ep-arrow::after {
+  color: #c4c7ca;
+  background-color: var(--bg-primary) !important;
+}
+.rmdp-shadow {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+  border: solid 1px var(--border-secondary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.rmdp-ep-shadow:after {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+.rmdp-border-bottom {
+    border-bottom: 1px solid var(--border-secondary) !important;
+}

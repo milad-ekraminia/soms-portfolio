@@ -1,0 +1,110 @@
+@use "/src/assets/styles/mixins" as *;
+
+.sideBar-modal-overlay {
+  position: fixed;
+  inset: 0; /* full screen */
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none; /* prevent interaction when closed */
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  background-color: transparent; /* default */
+  overflow: auto;
+  .sideBar-modal-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background: var(--bg-primary);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    will-change: transform;
+    overflow: auto;
+          @include flex-center(space-between, flex-start);
+
+    flex-direction: column;
+    &__close-btn {
+      position: absolute;
+      top: 2%;
+      right: 2%;
+      background: none;
+    }
+
+    &-headerless {
+      padding: 0;
+      .sideBar-modal-content__body {
+        padding: 0;
+      }
+    }
+
+    &__header {
+      @include flex-center(space-between, center);
+      @include text-style(text-primary-900, text-lg, 600, text-lg);
+      align-self: stretch;
+      width: 100%;
+      padding: var(--spacing-lg) var(--spacing-3xl) var(--spacing-2xl)
+        var(--spacing-3xl);
+      gap: var(--spacing-xl);
+      border-bottom: 1px solid var(--border-secondary);
+      &-close-btn {
+        background: none;
+      }
+    }
+
+    &__body {
+      min-width: 100%;
+      max-width: 100%;
+      width: 100%;
+      padding: var(--spacing-xl) var(--spacing-3xl);
+      height: 100%;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+
+    &__footer {
+      width: 100%;
+      padding: var(--spacing-3xl);
+      @include flex-center(space-around, center);
+      gap: var(--spacing-xl);
+      button {
+        width: 50%;
+      }
+    }
+  }
+  &-expanded {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    .sideBar-modal-content {
+      transform: translateX(0);
+    }
+  }
+
+  &-size-md .sideBar-modal-content {
+    width: 45vw;
+    @include respond-to("xl") {
+      width: 65%;
+    }
+  }
+
+  &-size-lg .sideBar-modal-content {
+    width: 75vw;
+    @include respond-to("xl") {
+      width: 96%;
+    }
+  }
+
+  &-size-full .sideBar-modal-content {
+    width: 100%;
+  }
+}
+
+.drawer-outside-click {
+  position: fixed;
+  inset: 0px;
+  z-index: 60;
+  background-color: rgba(0, 0, 0, 0.6);
+}

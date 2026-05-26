@@ -1,0 +1,34 @@
+@use "/src/assets/styles/mixins" as *;
+.status-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  &__step {
+    position: relative;
+    flex: 1 1 0;
+    height: 40px;
+    @include flex-center(center, center);
+
+    background: var(--bg-quaternary);
+
+    @include text-style(text-quaternary-500, text-sm, 500, text-sm);
+
+    clip-path: polygon(
+      0 0,
+      calc(100% - 18px) 0,
+      100% 50%,
+      calc(100% - 18px) 100%,
+      0 100%,
+      18px 50%
+    );
+    &--active {
+      background: var(--fg-success-secondary); // or your token
+      color: var(--text-white);
+    }
+
+
+  }
+}

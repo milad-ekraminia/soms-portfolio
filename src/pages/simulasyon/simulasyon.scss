@@ -1,0 +1,22 @@
+.simulation {
+  &__container {
+    grid-column: span 12;
+    height: auto;
+    .tree__header-actions {
+      margin-right: 0;
+    }
+  }
+  &__form {
+    display: flex;
+    gap: var(--spacing-xl);
+    max-width: 500px;
+    margin-bottom: var(--spacing-xl);
+    &__message {
+      color: var(--text-secondary-700);
+      font-size: var(--font-size-text-sm);
+    }
+  }
+  &__tree {
+    height: 90%;
+  }
+}

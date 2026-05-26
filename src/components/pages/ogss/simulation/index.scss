@@ -1,0 +1,120 @@
+@use "/src/assets/styles/mixins" as *;
+
+.simulation {
+  grid-column: span 12;
+  &__header {
+    @include flex-center(space-between, flex-start);
+    padding: var(--spacing-none);
+
+    align-self: stretch;
+    .action-rows {
+      @include flex-center(space-between, center);
+      flex-direction: row-reverse;
+
+      gap: 14px;
+    }
+  }
+  &__wrapper {
+    width: 100%;
+    height: 92%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--base-white);
+    color: var(--text-secondary-700);
+       .input-wrapper {
+            @include flex-center(flex-start, center);
+            gap: var(--spacing-xl);
+            .custom-button-secondary {
+              border: 1px solid var(--button-secondary-color-border);
+              @include text-style(
+                button-secondary-color-fg,
+                text-md,
+                600,
+                text-md
+              );
+            }
+            .main-input {
+              width: 330px;
+            }
+          }
+    &-content {
+      @include flex-center(flex-start, center);
+      flex-direction: column;
+      width: 100%;
+      gap: var(--spacing-4xl);
+      flex: 1 0 0;
+      align-self: stretch;
+      border-radius: var(--radius-none) var(--radius-2xl) var(--radius-2xl)
+        var(--radius-2xl);
+      border: 1px solid var(--border-primary);
+      background: var(--bg-secondary);
+      /* Shadows/shadow-xs */
+      box-shadow: 0px 1px 2px 0px var(--shadow-xs);
+      .outage-tree-filter {
+        @include flex-center(flex-start, center);
+        padding: var(--spacing-xl);
+        justify-content: space-between;
+        align-items: flex-start;
+        align-self: stretch;
+        border-bottom: 1px solid var(--border-primary);
+        & > .main-input {
+          width: 330px;
+        }
+        .action-groups {
+          width: fit-content;
+          @include flex-center(flex-start, center);
+          padding: var(--spacing-lg, 12px) var(--spacing-xl, 16px);
+          gap: 8px;
+          border-radius: var(--radius-md);
+          border: 1px solid var(--border-secondary);
+          background: var(--bg-secondary-hover);
+          .title {
+            @include text-style(fg-secondary-700, text-sm, 600, text-sm);
+            margin-right: var(--spacing-2xl);
+          }
+          .action {
+            @include flex-center(flex-start, flex-start);
+            @include text-style(text-secondary-700, text-sm, 500, text-sm);
+            gap: var(--spacing-md);
+          }
+        }
+      }
+      .tree {
+        width: 100%;
+        height: 100%;
+        .node-tree-search {
+            background-color: #fbcfcb;
+          }
+
+          .node-monitoring {
+            background-color: #bfdef8;
+          }
+
+          .node-notification {
+            background-color: #bee3ab;
+          }
+
+          .node-outage {
+            background-color: #fad1a3;
+          }
+
+          .node-device {
+            background-color: #e4cef7;
+          }
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    gap: var(--spacing-xl);
+    max-width: 50%;
+    margin-bottom: var(--spacing-xl);
+    input {
+      min-width: 200px;
+    }
+  }
+}

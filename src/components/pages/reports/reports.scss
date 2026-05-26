@@ -1,0 +1,95 @@
+@use "/src/assets/styles/mixins" as *;
+.reports-wrapper {
+  width: 100%;
+  grid-column: span 12;
+
+  .reports-table {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--border-primary);
+    background: var(--bg-secondary);
+    box-shadow: 0px 1px 2px 0px var(--shadow-xs);
+    padding: var(--spacing-xl);
+
+    gap: var(--spacing-3xl);
+    // flex: 1 0 0;
+    // align-self: stretch;
+    @include respond-to("2xl") {
+      grid-column: span 8;
+    }
+    .table-wrapper {
+      border: solid 1px var(--border-secondary);
+    }
+    &__header {
+      width: 100%;
+      @include flex-center(space-between, center);
+      padding: var(--spacing-xl);
+      .title {
+        @include flex-center(flex-start, center);
+        gap: var(--spacing-md);
+        @include text-style(text-primary-900, text-md, 600, text-md);
+      }
+    }
+  }
+
+  .reports-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: var(--spacing-3xl);
+    gap: var(--spacing-3xl);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-2xl);
+    @include respond-to("xl") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__item {
+      @include flex-center(space-between, flex-start);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-secondary);
+      background: var(--bg-primary);
+      box-shadow: 0 1px 2px 0 var(--shadow-xs);
+      position: relative;
+      .content {
+        @include flex-center(flex-start, flex-start);
+        flex-direction: column;
+        gap: var(--spacing-3xl);
+        .title {
+          @include text-style(text-secondary-700, text-xl, 500, text-xl);
+          z-index: 1;
+        }
+        .actions {
+          @include flex-center(flex-start, center);
+          gap: var(--spacing-md);
+        }
+      }
+      .icon-wrapper {
+        position: absolute;
+        bottom: 0;
+        right: calc(var(--spacing-xl) + 21px);
+        @include flex-center(center, flex-end);
+        @include respond-to("xl") {
+          right: calc(var(--spacing-xl) + 8px);
+          // bottom: -22px;
+          overflow: hidden;
+          padding: 16px 16px 0 16px;
+          z-index: 0;
+          svg {
+            width: 96px;
+            height: 96px;
+          }
+        }
+      }
+    }
+  }
+}
+.report-card-info-wrapper {
+  height: fit-content;
+  min-height: 160px;
+  .report-card-info {
+    @include text-style(text-secondary-700, text-md, 400, text-md);
+  }
+}

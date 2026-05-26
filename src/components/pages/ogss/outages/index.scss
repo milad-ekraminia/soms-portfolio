@@ -1,0 +1,353 @@
+@use "/src/assets/styles/mixins" as *;
+
+.tree-outages {
+  @include flex-center(flex-start, flex-start);
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+  height: calc(100% - 40px);
+
+  // height: 100% !important;
+  grid-column: span 12;
+  .action-rows {
+    width: 100%;
+    @include flex-center(flex-start, center);
+    flex-direction: row-reverse;
+    gap: 14px;
+    margin-left: auto;
+    height: 40px;
+    .custom-button {
+      @include text-style(button-secondary-fg, text-md, 600, text-md);
+    }
+  }
+  &__content {
+    @include flex-center(flex-start, flex-start);
+    width: 100%;
+    gap: 24px;
+    transition: all 0.3s ease-in-out;
+    .list-sidebar {
+      width: 20%;
+      @include flex-center(flex-start, flex-start);
+      flex-direction: column;
+      padding: var(--spacing-xl);
+      gap: var(--spacing-xl);
+      align-self: stretch;
+      // height: 100%;
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--border-primary);
+      background: #fff;
+      box-shadow: 0px 1px 2px 0px var(--shadow-xs);
+      .tab-container {
+        width: 100%;
+      }
+      &__filter-section {
+        @include flex-center(flex-start, flex-start);
+        flex-direction: column;
+        gap: 16px;
+        align-self: stretch;
+        .custom-button ,.date-input{
+          width: 100%;
+        }
+      }
+      &__actions {
+        width: 100%;
+        @include flex-center(flex-end, flex-start);
+        gap: var(--spacing-xl);
+        align-self: stretch;
+      }
+      &__list {
+        @include flex-center(flex-start, center);
+        flex-direction: column;
+        gap: 8px;
+        align-self: stretch;
+        overflow-y: auto;
+        height: 350px;
+        max-height: 100%;
+        &::-webkit-scrollbar {
+          display: none; // Chrome, Safari, Opera
+        }
+        &-item {
+          @include flex-center(flex-start, flex-start);
+          padding: var(--spacing-xl);
+          flex-direction: column;
+          gap: var(--spacing-md);
+          align-self: stretch;
+          border-radius: var(--radius-2xl);
+          border: 1px solid var(--border-disabled-subtle);
+          background: var(--bg-secondary-alt);
+          height: fit-content;
+          width: 100%;
+
+          .title {
+            @include text-style(text-secondary-700, text-lg, 600, text-lg);
+          }
+          .content {
+            @include flex-center(flex-start, flex-start);
+            flex-direction: column;
+            width: 100%;
+            gap: var(--spacing-md);
+
+            &__item {
+              @include flex-center(space-between, center);
+              width: 100%;
+              &-title,
+              &-value {
+                @include text-style(text-secondary-700, text-md, 500, text-md);
+              }
+            }
+          }
+          .actions {
+            width: 100%;
+            @include flex-center(space-between, center);
+            gap: 16px;
+            align-self: stretch;
+            margin-top: var(--spacing-lg);
+            .custom-button {
+              width: 100%;
+            }
+          }
+          &-active {
+            background: var(--bg-brand-primary);
+            .title {
+              @include text-style(
+                text-brand-secondary-700,
+                text-lg,
+                600,
+                text-lg
+              );
+            }
+            .content__item-title,
+            .content__item-value {
+              @include text-style(
+                text-brand-secondary-700,
+                text-md,
+                500,
+                text-md
+              );
+            }
+          }
+        }
+      }
+    }
+    .outage-tree-wrapper {
+      @include flex-center(flex-start, flex-start);
+      flex-direction: column;
+      flex: 1 0 0;
+      align-self: stretch;
+      width: 100%;
+      .tree-content {
+        @include flex-center(flex-start, center);
+        flex-direction: column;
+        width: 100%;
+        gap: var(--spacing-4xl);
+        flex: 1 0 0;
+        align-self: stretch;
+        border-radius: var(--radius-none) var(--radius-2xl) var(--radius-2xl)
+          var(--radius-2xl);
+        border: 1px solid var(--border-primary);
+        background: var(--bg-secondary);
+        /* Shadows/shadow-xs */
+        box-shadow: 0px 1px 2px 0px var(--shadow-xs);
+        .outage-tree-filter {
+          @include flex-center(flex-start, center);
+          padding: var(--spacing-xl);
+          justify-content: space-between;
+          align-items: flex-start;
+          align-self: stretch;
+          border-bottom: 1px solid var(--border-primary);
+          .input-wrapper {
+            @include flex-center(flex-start, center);
+            gap: var(--spacing-xl);
+            .custom-button-secondary {
+              border: 1px solid var(--button-secondary-color-border);
+              @include text-style(
+                button-secondary-color-fg,
+                text-md,
+                600,
+                text-md
+              );
+            }
+            .main-input {
+              width: 330px;
+            }
+          }
+          .action-groups {
+            width: fit-content;
+            @include flex-center(flex-start, center);
+            padding: var(--spacing-lg, 12px) var(--spacing-xl, 16px);
+            gap: 8px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-secondary);
+            background: var(--bg-secondary-hover);
+            .title {
+              @include text-style(fg-secondary-700, text-sm, 600, text-sm);
+              margin-right: var(--spacing-2xl);
+            }
+            .action {
+              @include flex-center(flex-start, flex-start);
+              @include text-style(text-secondary-700, text-sm, 500, text-sm);
+              gap: var(--spacing-md);
+            }
+          }
+        }
+        .tree {
+          width: 100%;
+          height: 100%;
+          .node-tree-search {
+            background-color: #fbcfcb;
+          }
+
+          .node-monitoring {
+            background-color: #bfdef8;
+          }
+
+          .node-notification {
+            background-color: #bee3ab;
+          }
+
+          .node-outage {
+            background-color: #fad1a3;
+          }
+
+          .node-device {
+            background-color: #e4cef7;
+          }
+        }
+      }
+    }
+    &-show-full {
+      gap: 0;
+      height: 100%;
+      .list-sidebar {
+        max-width: 0%;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+      }
+    }
+  }
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include border-style(var(--gray-light-300), var(--radius-md));
+    box-shadow: 0px 1px 2px 0px var(--shadow-xs);
+    background-color: var(--base-white);
+    color: var(--text-secondary-700);
+  }
+}
+.info-container {
+  @include flex-center(flex-start, center);
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  background: var(--bg-primary);
+
+  /* Shadows/shadow-xl */
+  // box-shadow: 0 20px 24px -4px var(--shadow-xl-01),
+  //   0 8px 8px -4px var(--shadow-xl-02);
+  width: 1343px;
+  &__header {
+    @include flex-center(flex-start, flex-start);
+    align-self: stretch;
+    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-lg)
+      var(--spacing-3xl);
+    gap: var(--spacing-xl);
+    .icon {
+      @include flex-center(center, center);
+      width: 48px;
+      height: 48px;
+      padding: 12px;
+      justify-content: center;
+      align-items: center;
+      border-radius: var(--radius-xl);
+      background: var(--bg-success-secondary);
+    }
+    .title {
+      @include text-style(text-secondary-700, text-lg, 600, text-lg);
+    }
+  }
+  &__body {
+    @include flex-center(flex-start, flex-start);
+    padding: 0 var(--spacing-3xl);
+    width: 100%;
+    &-table {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      & > .column {
+        @include flex-center(flex-start, center);
+        height: 100%;
+        flex-direction: column;
+        border-radius: var(--radius-none);
+        border-top: 1px solid var(--border-primary);
+        border-left: 1px solid var(--border-primary);
+        border-bottom: 1px solid var(--border-primary);
+        &:first-of-type {
+          border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+          .header {
+            border-radius: var(--radius-xl) 0 0 0;
+          }
+        }
+        &:last-of-type {
+          border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+          border-right: 1px solid var(--border-primary);
+          .header {
+            border-radius: 0 var(--radius-xl) 0 0;
+          }
+        }
+        .header {
+          @include flex-center(flex-start, center);
+          padding: var(--spacing-lg) var(--spacing-xl);
+          align-self: stretch;
+          background: var(--bg-tertiary);
+          &-title {
+            @include text-style(text-secondary-700, text-md, 600, text-md);
+          }
+        }
+        .body {
+          @include flex-center(flex-start, center);
+          flex-direction: column;
+          padding: var(--spacing-xl);
+          gap: var(--spacing-lg);
+          align-self: stretch;
+          width: 100%;
+          .item {
+            @include flex-center(flex-start, center);
+            gap: var(--spacing-md);
+            width: 100%;
+
+            .text {
+              @include text-style(text-secondary-700, text-sm, 500, text-sm);
+              width: 100%;
+            }
+            .icon {
+              display: flex;
+              padding: var(--spacing-xs);
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              border-radius: var(--radius-full);
+              width: 22px;
+              height: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__footer {
+    @include flex-center(flex-end, center);
+    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-xl)
+      var(--spacing-3xl);
+    gap: var(--spacing-lg);
+    align-self: stretch;
+    .custom-button-secondary {
+      border: 1px solid var(--button-secondary-color-border);
+      @include text-style(button-secondary-color-fg, text-md, 600, text-md);
+    }
+  }
+}

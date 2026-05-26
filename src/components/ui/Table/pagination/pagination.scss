@@ -1,0 +1,109 @@
+/* General pagination container */
+@use "/src/assets/styles/mixins" as *;
+.pagination-container {
+  position: sticky;
+  left: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-lg);
+  // padding: var(--spacing-lg) var(--spacing-3xl) var(--spacing-lg)
+  //   var(--spacing-3xl);
+    padding: var(--spacing-lg) var(--spacing-2xl);
+  align-items: center;
+  align-self: stretch;
+
+  .pagination-wrapper {
+    grid-column: span 7;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100%;
+    @include respond-to("xl") {
+      grid-column: span 9;
+    }
+    &-record {
+      grid-column: span 3;
+      @include flex-center(flex-start, center);
+      @include respond-to("xl") {
+        grid-column: span 3;
+      }
+
+      p {
+        font-size: var(--font-size-text-sm);
+        font-weight: 600;
+        color: var(--text-secondary-700);
+      }
+    }
+
+    &-total-count {
+      @include flex-center(flex-end, center);
+      grid-column: span 5;
+      gap: var(--spacing-lg);
+      @include respond-to("xl") {
+        grid-column: span 3;
+      }
+      .row-select-box {
+        width: 74px !important;
+        max-width: 74px !important;
+        .select-input {
+          width: 74px !important;
+          max-width: 74px !important;
+          min-width: 74px !important;
+        }
+      }
+      &-info {
+        font-size: 14px;
+        color: var(--text-secondary-700);
+      }
+    }
+    .page-numbers {
+      @include flex-center(flex-end, center);
+      gap: 12px;
+      grid-column: span 9;
+      @include respond-to("xl") {
+        grid-column: span 9;
+        @include flex-center(center, center);
+      }
+      .page-number {
+        @include flex-center(center, center);
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        background-color: inherit;
+        color: var(--text-secondary-700);
+        padding: var(--space-1) var(--space-3);
+        transition: background-color 0.2s ease, color 0.2s ease;
+        border-radius: var(--radius-md);
+        font-weight: 500;
+        &.active {
+          background: var(--bg-brand-primary-alt) !important;
+        }
+
+        &.hover {
+          &:hover {
+            background-color: var(--bg-primary-hover);
+          }
+        }
+      }
+      .arrow-btns {
+        @include flex-center(center, center);
+        // padding: 0 var(--spacing-md);
+      }
+    }
+  }
+  &-minified-pagination {
+    @include flex-center(space-between, center);
+    flex-direction: row-reverse;
+    @include respond-to("xl") {
+      padding-left: 0;
+    }
+    .pagination-wrapper {
+      @include flex-center(flex-end, center);
+      gap: var(--spacing-md);
+      // todo mixin text
+      .page-numbers {
+        @include text-style(fg-secondary-700, text-sm, 400, text-sm);
+      }
+    }
+  }
+}

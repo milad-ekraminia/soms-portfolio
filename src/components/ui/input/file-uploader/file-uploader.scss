@@ -1,0 +1,41 @@
+@use "/src/assets/styles/mixins" as *;
+.file-upload {
+  @include flex-center(center, center);
+  width: 100%;
+  max-width: 800px;
+  height: 200px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  padding: var(--spacing-xl) var(--spacing-3xl);
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  align-self: stretch;
+
+  @include border-style(var(--border-secondary), var(--radius-xl));
+  background: var(--bg-primary);
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    @include flex-center(center, center);
+    flex-direction: column;
+    text-align: center;
+    color: var(--gray-dark-700);
+    .upload-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .upload-text {
+      .upload-click {
+        @include text-style(button-tertiary-color-fg, text-sm, 600, text-sm);
+      }
+
+      .upload-formats {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

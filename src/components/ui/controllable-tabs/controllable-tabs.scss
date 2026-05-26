@@ -1,0 +1,30 @@
+@use "/src/assets/styles/mixins" as *;
+
+.controllable-tabs {
+  @include flex-center(flex-start, flex-start);
+  gap: var(--spacing-md);
+  &-item {
+    @include flex-center(center, center);
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+    border-radius: 6px 6px var(--radius-none) 0px;
+    border-top: 1px solid var(--border-primary);
+    border-right: 1px solid var(--border-primary);
+    border-left: 1px solid var(--border-primary);
+    opacity: 0.3;
+    background: var(--bg-secondary);
+    @include text-style(text-disabled, text-sm, 600, text-sm);
+    &-active {
+      opacity: 1;
+      border-radius: 6px 6px var(--radius-none) 0px;
+      border-top: 1px solid var(--border-primary);
+      border-right: 1px solid var(--border-primary);
+      border-left: 1px solid var(--border-primary);
+      background: var(--bg-secondary);
+      @include text-style(text-brand-secondary-700, text-sm, 600, text-sm);
+    }
+    button {
+      background-color: unset;
+    }
+  }
+}

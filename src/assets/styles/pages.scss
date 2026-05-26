@@ -1,0 +1,57 @@
+@use "../../components/pages/dashboard/dashboard-aside.scss";
+@use "../../components/pages/dashboard/dashboard-content.scss";
+@use "../../components/pages/error/error-page.scss";
+@use "../../components/pages/error/error-group-buttons/error-group-button.scss";
+@use "../../components/pages/life-cycle/life-cycle.scss";
+@use "../../components/pages/login/login.scss";
+@use "../../components/pages/notification/notification.scss";
+@use "../../components/pages/ogss/historical-network/historical-network.scss";
+@use "../../components/pages/ogss/outages/ogss-outages.scss";
+@use "../../components/pages/ogss/simulation/simulation.scss";
+@use "../../components/pages/reports/reports.scss";
+@use "../../components/pages/settings/settings.scss";
+@use "../../components/pages/outages/unplanned/unplanned-outage.scss";
+// components
+@use "../../components/ui/accordion/accordion.scss";
+@use "../../components/ui/button/button.scss";
+@use "../../components/ui/cards/card.scss";
+@use "../../components/ui/cards/card-column-wrapper/card-column-wrapper.scss";
+@use "../../components/ui/cards/cards-wrapper/cards-wrapper.scss";
+@use "../../components/ui/charts/charts.scss";
+@use "../../components/ui/controllable-tabs/controllable-tabs.scss";
+@use "../../components/ui/drawer/drawer.scss";
+@use "../../components/ui/dropdown/dropdown-wrapper/drop-down-wrapper.scss";
+@use "../../components/ui/dropdown/portal-dropdown-wrapper/portal-dropdown-wrapper.scss";
+@use "../../components/ui/input/input.scss";
+@use "../../components/ui/input/check-box/check-box.scss";
+@use "../../components/ui/input/date-input/date-input.scss";
+@use "../../components/ui/input/date-input/year-date-input/year-date-input.scss";
+@use "../../components/ui/input/file-uploader/file-uploader.scss";
+@use "../../components/ui/input/select-input/select-input.scss";
+@use "../../components/ui/input/textarea/textarea.scss";
+@use "../../components/ui/input/radio/radio-input.scss";
+@use "../../components/ui/input/toggle-button/Toggle.scss";
+@use "../../components/ui/loader/loader.scss";
+@use "../../components/ui/map/FeaturePopup.scss";
+@use "../../components/ui/map/map.scss";
+@use "../../components/ui/map/RefreshToggle.scss";
+@use "../../components/ui/map/SearchBox.scss";
+@use "../../components/ui/modal-wrapper/modal-wrapper.scss";
+@use "../../components/ui/notification/notification-modal/notification-modal.scss";
+@use "../../components/ui/notification/notification-items.scss";
+@use "../../components/ui/skeleton/skeleton-loader.scss";
+
+@use "../../components/ui/Table/table.scss";
+@use "../../components/ui/Table/operations/operations.scss";
+@use "../../components/ui/Table/pagination/pagination.scss";
+
+@use "../../components/ui/tabs/tabs.scss";
+
+@use "../../components/ui/tooltip/tooltip.scss";
+
+@use "../../components/ui/toast/toast.scss";
+@use "../../components/ui/tree-chart/tree-chart.scss";
+@use "../../components/ui/user-avatar/user-avatar.scss";
+@use "../../components/ui/detail-key-value-list/detail-key-value-list.scss";
+@use "../../components/ui/loader/spinner/spinner.scss";
+@use "../../components/ui/status-stepper/status-stepper.scss";

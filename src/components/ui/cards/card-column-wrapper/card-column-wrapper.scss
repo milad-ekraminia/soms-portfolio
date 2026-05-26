@@ -1,0 +1,40 @@
+@use "/src/assets/styles/mixins" as *;
+.card-column {
+  grid-column: span 3;
+  height: 100%;
+  @include flex-center(space-between, flex-start);
+  flex-direction: column;
+  padding: var(--spacing-xl);
+  padding-right: 0px;
+  background-color: var(--base-white);
+  @include border-style(var(--border-primary), var(--radius-2xl));
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  gap: var(--space-3);
+  overflow: auto;
+  @include respond-to("xl") {
+    min-width: 406px;
+  }
+
+  &__body {
+    height: 100%;
+    @include flex-center(flex-start, flex-start);
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    width: 100%;
+    border-bottom: 1px solid var(--border-secondary);
+    padding-bottom: var(--spacing-lg);
+    overflow-y: scroll;
+    .title {
+      @include text-style(text-secondary-700, text-md, 600, text-md);
+    }
+    .list {
+      @include flex-center(flex-start, center);
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+  }
+  &__footer {
+    width: 100%;
+  }
+}

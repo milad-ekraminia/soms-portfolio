@@ -1,0 +1,95 @@
+@use "/src/assets/styles/mixins" as *;
+
+.notification-container {
+  position: relative;
+  &__button {
+    @include flex-center(flex-start, center);
+    padding: 10px;
+    gap: 10px;
+    background-color: inherit;
+  }
+  &__list {
+    position: fixed;
+    right: 0%;
+    display: flex;
+    flex-direction: column-reverse;
+    bottom: 5%;
+    z-index: 999;
+    width: 400px;
+    background: none;
+    gap: var(--spacing-md);
+    border-radius: var(--radius-md);
+    max-height: 90dvh;
+    overflow: auto;
+    button {
+      background: none;
+    }
+  }
+
+  &__card {
+    @include flex-center(flex-end, flex-start);
+    padding: var(--spacing-xl);
+    background: var(--bg-primary-alt);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+    height: 80px;
+    min-height: 80px;
+    max-height: 80px;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+
+    &-content {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xl);
+      position: absolute;
+      left: 0;
+      width: 90%;
+      padding: 10px;
+      transition: all 0.4s ease;
+      p {
+        @include text-style(fg-secondary-700, text-sm, 400, text-sm);
+        text-overflow: ellipsis;
+        width: 280px;
+      }
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+      &.primary {
+        top: 0;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      &.secondary {
+        top: 100%;
+        opacity: 0;
+        transform: translateY(20px);
+        @include text-style(fg-secondary-700, text-sm, 400, text-sm);
+      }
+    }
+    &:hover {
+      .primary {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      .secondary {
+        top: 0;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    &-delete {
+      align-self: baseline;
+    }
+  }
+  &-outside-click {
+    position: fixed;
+    inset: 0px;
+    z-index: 10;
+    opacity: 0;
+  }
+}

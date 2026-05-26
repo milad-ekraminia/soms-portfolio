@@ -1,0 +1,53 @@
+.refresh-toggle-root {
+  position: absolute;
+  top: 80px; // Above the search icon
+  left: 5px;
+  z-index: 1100;
+}
+
+.refresh-toggle-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #333;
+
+  &:hover {
+    background-color: #f4f4f4;
+  }
+
+  &.active {
+    background-color: #4CAF50;
+    color: white;
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+
+    &.rotating {
+      animation: rotate 2s linear infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

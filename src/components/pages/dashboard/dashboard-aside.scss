@@ -1,0 +1,128 @@
+@use "/src/assets/styles/mixins" as *;
+
+.dashboard-aside {
+  grid-column: span 3;
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  /* make the aside take full viewport height on desktop and stick */
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  border-left: 1px solid var(--border-primary);
+  padding-left: var(--spacing-xl);
+  @include respond-to("xl") {
+    grid-column: 1 / -1; // move below content
+    order: 2; // show after content
+
+    grid-row: auto; // let it flow naturally
+    border-left: none;
+    border-top: 1px solid var(--border-primary); // optional separator
+    padding-left: 0;
+    padding-top: var(--spacing-xl);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+    min-height: 400px;
+    /* revert desktop full-height on small screens */
+    height: auto;
+    position: static;
+    .dashboard-aside__line {
+      display: none;
+    }
+  }
+  .breadcrumb {
+    width: 100%;
+    @include text-style(text-placeholder, text-xs, 400, text-xs);
+    &-item {
+      cursor: pointer;
+      &.active {
+        color: var(--text-brand-tertiary-alt);
+      }
+    }
+  }
+  &__line {
+    border-bottom: 1px solid var(--border-primary);
+  }
+  &__chart-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+    background-color: var(--bg-primary);
+    @include border-style(var(--border-primary), var(--radius-xl));
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    .dv-area-chart-loader-box {
+      width: 100%;
+      height: 320px;
+    }
+
+    .header {
+      @include flex-center(space-between, center);
+      align-self: stretch;
+      h3 {
+        @include text-style(text-secondary-700, text-md, 600, text-md);
+      }
+      p {
+        @include text-style(text-placeholder, text-xs, 400, text-xs);
+      }
+    }
+
+    .options {
+      height: "fit-content";
+      align-self: "flex-start";
+      .select-input__dropdown {
+        min-width: fit-content;
+        right: -10%;
+      }
+    }
+    .subs-container {
+      justify-content: space-between;
+      .legends {
+        @include flex-center(flex-start, center);
+        gap: var(--spacing-lg);
+        & > div {
+          @include flex-center(flex-start, center);
+          gap: var(--spacing-md);
+        }
+        width: 100%;
+        .legend-point {
+          width: 14px;
+          height: 14px;
+          border-radius: var(--radius-full);
+        }
+        .legend-label {
+          @include text-style(text-secondary-700, text-sm, 400, text-sm);
+        }
+        .stat {
+          @include text-style(text-secondary-700, text-sm, 600, text-sm);
+        }
+      }
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4xl);
+      width: 100%;
+      .subs-info {
+        @include flex-center(flex-start, flex-start);
+        gap: var(--spacing-md);
+        flex-direction: column;
+        .info {
+          @include flex-center(flex-start, flex-start);
+          gap: var(--spacing-md);
+          p {
+            @include text-style(text-quaternary-500, text-sm, 400, text-sm);
+          }
+        }
+        .percent {
+          @include text-style(text-success-primary-600, text-sm, 500, text-sm);
+        }
+      }
+    }
+  }
+}

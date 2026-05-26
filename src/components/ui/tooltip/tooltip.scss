@@ -1,0 +1,39 @@
+@use "/src/assets/styles/mixins" as *;
+
+.tooltip-wrapper {
+  position: relative;
+  display: initial;
+
+  .tooltip {
+    display: none;
+    background-color: var(--base-black);
+    padding: var(--spacing-md) var(--spacing-md);
+    border-radius: var(--radius-md);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    @include text-style(base-white, text-xs, 400, text-xs);
+    text-align: center;
+    white-space: nowrap;
+    z-index: 1000;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: 50%;
+      transform: translateX(-50%);
+      rotate: 180deg;
+      border-width: 6px;
+      border-style: solid;
+      border-color: var(--base-black) transparent transparent transparent;
+    }
+
+  }
+
+  &:hover .tooltip {
+    display: initial;
+  }
+}

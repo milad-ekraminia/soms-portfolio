@@ -1,0 +1,189 @@
+@use "/src/assets/styles/mixins" as *;
+
+.select-input {
+  @include flex-center(flex-start, flex-start);
+  min-width: 120px;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-self: stretch;
+  position: relative;
+  &__control {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font: inherit;
+    cursor: pointer;
+    color: var(--text-secondary-700);
+
+    &:read-only {
+      cursor: pointer;
+    }
+  }
+  &__label {
+    @include text-style(text-secondary-700, text-sm, 500, text-sm);
+  }
+  &__required {
+    color: var(--color-error, #e53935);
+    font-size: 14px;
+    line-height: 1;
+  }
+  &-loading {
+    .skeleton {
+      height: 40px;
+    }
+  }
+  &__select {
+    @include flex-center(space-between, center);
+    @include text-style(text-secondary-700, text-md, 400, text-md);
+
+    height: 40px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    gap: var(--spacing-md);
+    align-self: stretch;
+
+    @include border-style(var(--border-primary), var(--radius-md));
+    background-color: var(--bg-primary);
+    overflow: hidden;
+    box-shadow: 0px 1px 2px 0px var(--shadow-xs);
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    &-placeholder {
+      @include text-style(text-placeholder, text-md, 400, text-md);
+    }
+    &-error {
+      border-color: var(--border-error) !important;
+      background-color: var(--bg-error-light);
+    }
+  }
+  &__error-message {
+    @include text-style(text-error-primary-600, text-sm, 400, text-sm);
+  }
+
+  &__dropdown {
+    position: absolute;
+    width: 100%;
+    max-height: 153px;
+    display: flex;
+    padding: var(--spacing-xs);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    @include border-style(var(--border-secondary), var(--radius-md));
+    background-color: var(--bg-primary);
+    box-shadow:
+      0px 12px 16px -4px var(--shadow-lg-01),
+      0px 4px 6px -2px var(--shadow-lg-02);
+    overflow-y: auto;
+    z-index: 9999;
+
+    &.dropdown-down {
+      top: 100%;
+    }
+
+    &.dropdown-up {
+      bottom: 100%;
+    }
+
+    .dropdown-item {
+      height: 100%;
+      width: 100%;
+
+      .dropdown-option {
+        @include text-style(text-tertiary-600, text-md, 400, text-md);
+        display: flex;
+        align-items: center;
+        background-color: var(--bg-primary);
+        gap: var(--spacing-md);
+        width: 100%;
+        padding: 10px 10px 10px var(--spacing-md);
+        border: none;
+        text-align: left;
+
+        &-selected {
+          background-color: var(--bg-active);
+          justify-content: space-between;
+          border-radius: var(--spacing-md);
+        }
+      }
+      &.dropdown-empty {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+        width: 100%;
+        padding: 6px 8px;
+
+        .dropdown-empty__text {
+          @include text-style(text-secondary-700, text-md, 400, text-md);
+        }
+      }
+    }
+  }
+  .multi-select-input__dropdown {
+    position: absolute;
+    width: 100%;
+    max-height: 153px;
+    display: flex;
+    padding: var(--spacing-xs);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    @include border-style(var(--border-secondary), var(--radius-md));
+    background-color: var(--bg-primary);
+    box-shadow:
+      0px 12px 16px -4px var(--shadow-lg-01),
+      0px 4px 6px -2px var(--shadow-lg-02);
+    overflow-y: auto;
+    z-index: 9999;
+
+    &.dropdown-down {
+      top: 100%;
+    }
+
+    &.dropdown-up {
+      bottom: 100%;
+    }
+
+    .dropdown-item {
+      height: 100%;
+      width: 100%;
+
+      .dropdown-option {
+        @include text-style(text-tertiary-600, text-md, 400, text-md);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: var(--bg-primary);
+        gap: var(--spacing-md);
+        width: 100%;
+        padding: 10px 10px 10px var(--spacing-md);
+        border: none;
+        text-align: left;
+        span {
+          display: inline-block; /* or block or inline-block */
+          max-width: 200px; /* set a width or max-width */
+          // white-space: nowrap; /* prevent text wrapping */
+          // overflow: hidden; /* hide overflow */
+          // text-overflow: ellipsis; /* show "..." */
+          // vertical-align: middle; /* optional, for inline alignment */
+          white-space: normal; /* allow wrapping */
+          overflow: visible; /* don't hide overflow */
+          text-overflow: clip; /* disable ellipsis */
+          word-break: break-word; /* break long words if needed */
+        }
+        &-selected {
+          background-color: var(--bg-active);
+          border-radius: var(--spacing-md);
+        }
+      }
+    }
+  }
+
+  &-outside-click {
+    position: fixed;
+    inset: 0px;
+    z-index: 10;
+    opacity: 0;
+  }
+}

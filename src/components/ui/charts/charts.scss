@@ -1,0 +1,127 @@
+@use "/src/assets/styles/mixins" as *;
+
+.chart-wrapper {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.fill-map-wrapper {
+  width: 100%;
+  flex-grow: 1;
+  // height: 320px;
+  height: 100%;
+}
+
+.apexcharts-tooltip {
+  overflow: visible !important;
+}
+
+.donut-tooltip {
+  background-color: var(--base-black);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--base-black) transparent transparent transparent;
+  }
+}
+
+.donut-chart {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-xs);
+  align-self: stretch;
+  @include border-style(var(--border-secondary), var(--radius-md));
+  background-color: var(--bg-primary-hover);
+
+  h3 {
+    @include text-style(text-secondary-700, text-md, 600, text-md);
+  }
+  &__legends {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-xs);
+      font-size: 14px;
+      .marker {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        .custom-legend-marker {
+          display: inline-block;
+          width: 20px;
+          height: 8px;
+          border-radius: 999px;
+        }
+
+        .custom-legend-label {
+          @include text-style(text-secondary-700, text-sm, 500, text-sm);
+        }
+      }
+      .custom-legend-value {
+        @include text-style(text-secondary-700, text-sm, 600, text-sm);
+      }
+    }
+  }
+}
+
+.pie-chart-legend-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3xl);
+  width: 100%;
+  li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    .legend-point {
+      width: 14px;
+      height: 14px;
+      border-radius: var(--radius-full);
+    }
+    .legend-label {
+      @include text-style(text-secondary-700, text-sm, 400, text-sm);
+    }
+    p {
+      @include text-style(text-secondary-700, text-sm, 600, text-sm);
+    }
+  }
+}
+
+.map-graph-footer {
+  width: 100%;
+  @include flex-center(space-between, center);
+  &__custom-legend {
+    width: 100%;
+    @include flex-center(flex-start, center);
+    gap: 18px;
+    padding-top: var(--spacing-md);
+    li {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      .legend-point {
+        width: 34px;
+        height: 12px;
+        border-radius: var(--radius-xxs);
+      }
+      p {
+        @include text-style(text-secondary-700, text-sm, 500, text-sm);
+      }
+    }
+  }
+}

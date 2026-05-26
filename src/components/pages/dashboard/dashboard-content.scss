@@ -1,0 +1,461 @@
+@use "/src/assets/styles/mixins" as *;
+
+.dashboard-content {
+  grid-column: span 9;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  order: 1;
+  height: 100%; // or 100vh if this is the top-level container
+  min-height: 0; // ensure flex children can shrink
+  .dashboard-cards {
+    flex-shrink: 0; // take needed space, don’t shrink
+  }
+
+  .table-wrapper {
+    flex: 0 0 auto; // do not grow, height = content height
+    flex-shrink: 0;
+    max-height: 387.5px;
+  }
+  @include respond-to("xl") {
+    grid-column: 1 / -1; // take full width
+    order: 1;
+    min-height: unset;
+  }
+  .dashboard-map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+    flex: 2 1 0; // make the map container take more vertical space
+    min-height: 0; // important so children with overflow can scroll
+    max-height: none; // override any fixed max-height so it can expand
+    @include border-style(var(--border-primary), var(--radius-xl));
+    background-color: var(--bg-primary);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    @include respond-to("xl") {
+      min-height: 600px;
+    }
+    &__main {
+      @include flex-center(center, center);
+      flex-direction: column;
+      width: 100%;
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    &__header {
+      @include flex-center(space-between, center);
+      align-self: stretch;
+    }
+    &__subject {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      gap: var(--spacing-xxs);
+      h1 {
+        @include text-style(text-secondary-700, text-md, 600, text-md);
+      }
+      p {
+        @include text-style(text-placeholder, text-xs, 400, text-xs);
+      }
+    }
+    &__select {
+      width: 200px;
+    }
+  }
+
+  .map-graph {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    &__svg {
+      transform-origin: center;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      svg {
+        height: 95%;
+      }
+    }
+    &__zoom-controls {
+      @include flex-center(flex-start, center);
+      flex-direction: column;
+      gap: 8px;
+      position: absolute;
+      right: 0;
+      bottom: -40px;
+    }
+  }
+
+  .overview-map-tooltip {
+    @include flex-center(flex-start, flex-start);
+    flex-direction: column;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-lg);
+
+    background-color: var(--bg-primary-hover);
+    @include border-style(var(--border-primary), 8px);
+    box-shadow:
+      0px 0px 0px 1px rgba(16, 24, 40, 0.18) inset,
+      0px -2px 0px 0px rgba(16, 24, 40, 0.05) inset,
+      0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    position: absolute;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+    opacity: 0;
+    transition:
+      opacity 0.3s,
+      left 0.3s,
+      top 0.3s;
+    &-visible {
+      opacity: 1;
+    }
+    h3 {
+      @include text-style(text-primary-900, text-sm, 600, text-sm);
+    }
+
+    &__info {
+      @include flex-center(flex-start, flex-start);
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    &__rows {
+      @include flex-center(flex-start, center);
+      gap: var(--spacing-md);
+      .title {
+        @include text-style(text-secondary-700, text-xs, 500, text-xs);
+      }
+      .value {
+        @include text-style(text-secondary-700, text-xs, 600, text-xs);
+      }
+      .active {
+        @include flex-center(flex-start, center);
+        @include border-style(
+          var(--button-secondary-error-fg),
+          var(--radius-full)
+        );
+        gap: var(--spacing-md);
+        padding: var(--spacing-xxs) var(--spacing-md) var(--spacing-xxs)
+          var(--spacing-sm);
+
+        background-color: var(--bg-error-primary);
+        span {
+          @include text-style(
+            button-secondary-error-fg,
+            text-xxs,
+            600,
+            text-xxs
+          );
+        }
+      }
+    }
+  }
+
+  .general-map-tooltip {
+    @include flex-center(flex-start, flex-start);
+    flex-direction: column;
+    padding: var(--spacing-md) var(--spacing-lg);
+    @include border-style(var(--border-primary), var(--radius-md));
+    background-color: var(--bg-primary-hover);
+    gap: 2px;
+
+    position: absolute;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+    opacity: 0;
+    transition:
+      opacity 0.3s,
+      left 0.3s,
+      top 0.3s;
+    &-visible {
+      opacity: 1;
+    }
+    p {
+      @include text-style(text-secondary-700, text-sm, 500, text-sm);
+    }
+    span {
+      @include text-style(text-secondary-700, text-sm, 600, text-sm);
+    }
+    h5 {
+      @include text-style(text-secondary-700, text-xs, 600, text-sm);
+      margin-bottom: 4px;
+    }
+  }
+
+  .outage-rate-card {
+    display: flex;
+    padding: var(--spacing-xl);
+    justify-content: space-between;
+    flex: 1 0 0;
+    align-self: stretch;
+    height: 12rem;
+    @include border-style(var(--border-primary), var(--radius-xl));
+    background-color: var(--bg-primary);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    @include respond-to("xl") {
+      .chart {
+        max-width: 7.5rem;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xxs);
+        h1 {
+          @include text-style(text-secondary-700, text-lg, 600, text-lg);
+        }
+        p {
+          @include text-style(text-disabled, text-xs, 400, text-xs);
+        }
+      }
+      .extra-info {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        gap: var(--spacing-xs);
+        .legends {
+          @include flex-center(flex-start, center);
+          gap: var(--spacing-lg);
+          & > div {
+            @include flex-center(flex-start, center);
+            gap: var(--spacing-md);
+          }
+          width: 100%;
+          .legend-point {
+            width: 14px;
+            height: 14px;
+            border-radius: var(--radius-full);
+          }
+          .legend-label {
+            @include text-style(text-secondary-700, text-sm, 400, text-sm);
+          }
+          .stat {
+            @include text-style(text-secondary-700, text-sm, 600, text-sm);
+          }
+        }
+        .subs-container {
+          @include flex-center(space-between, center);
+          gap: var(--spacing-4xl);
+          width: 100%;
+          @include respond-to("xl") {
+            @include flex-center(flex-start, flex-start);
+            flex-direction: column;
+            gap: var(--spacing-xl);
+          }
+          .subs-info {
+            @include flex-center(flex-start, flex-start);
+            gap: var(--spacing-md);
+            flex-direction: column;
+            @include respond-to("xl") {
+              @include flex-center(flex-start, center);
+
+              gap: var(--spacing-xs);
+            }
+            .info {
+              @include flex-center(flex-start, flex-start);
+              gap: var(--spacing-md);
+              p {
+                @include text-style(text-quaternary-500, text-sm, 400, text-sm);
+              }
+            }
+            .percent {
+              &-inc {
+                @include text-style(
+                  text-success-primary-600,
+                  text-sm,
+                  500,
+                  text-sm
+                );
+              }
+              &-dec {
+                @include text-style(
+                  text-error-primary-600,
+                  text-sm,
+                  500,
+                  text-sm
+                );
+              }
+            }
+          }
+        }
+      }
+    }
+    .chart {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 12rem;
+    }
+  }
+
+  .subscriber-count-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-xl);
+    gap: var(--spacing-xl);
+    flex: 1 0 0;
+    align-self: stretch;
+    height: 12rem;
+
+    @include border-style(var(--border-primary), var(--radius-xl));
+    background-color: var(--bg-primary);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xxs);
+      h1 {
+        @include text-style(text-secondary-700, text-lg, 600, text-lg);
+      }
+      p {
+        @include text-style(text-disabled, text-xs, 400, text-xs);
+      }
+    }
+    .progress-bar-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+      align-self: stretch;
+      .progress-bar {
+        width: 100%;
+        height: 19px;
+        background-color: var(--bg-secondary-hover);
+        border-radius: var(--radius-sm);
+
+        span {
+          min-width: 40px;
+          display: flex;
+          padding: 3px 5px;
+          background-color: var(--utility-brand-300-alt);
+          height: 19px;
+          border-radius: var(--radius-sm);
+          align-items: center;
+          justify-content: center;
+          @include text-style(text-brand-primary-900, text-xs, 500, text-xs);
+        }
+      }
+      .color-indicator {
+        width: 100%;
+        height: 6px;
+        border-radius: 6px;
+        align-self: stretch;
+        background: linear-gradient(
+          90deg,
+          #17b26a 0%,
+          #fec84b 33.83%,
+          #dc6803 69.08%,
+          #d92d20 100%
+        );
+      }
+      .icon-indicator {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px var(--spacing-xxs);
+      }
+      .text-indicator {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p {
+          color: var(--text-quaternary-500);
+          font-size: 10px;
+          line-height: 12px;
+        }
+      }
+    }
+    .extra-info {
+      display: flex;
+      height: 20px;
+      gap: var(--spacing-3xl);
+      align-self: stretch;
+      @include respond-to("xl") {
+        @include flex-center(flex-start, flex-start);
+        flex-direction: column;
+        gap: 0;
+      }
+      div {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        p {
+          @include text-style(text-secondary-700, text-sm, 400, text-sm);
+        }
+        span {
+          @include text-style(text-brand-primary-900, text-sm, 600, text-sm);
+        }
+      }
+    }
+  }
+
+  &-table-header {
+    width: 100%;
+    display: flex;
+    padding: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    border-bottom: solid 1px var(--border-primary);
+    & > h3 {
+      @include text-style(text-secondary-700, text-md, 600, text-md);
+    }
+    .options-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      .select-input__dropdown {
+        width: 150px;
+      }
+    }
+  }
+
+  // Responsive adjustments: make map area larger and sub-cards smaller
+  @media (max-width: 1024px), (max-height: 756px) {
+    .dashboard-map-container {
+      flex: 3 1 0;
+      min-height: 290px;
+      padding: var(--spacing-lg);
+      &__main {
+        flex: 1 1 auto;
+      }
+    }
+
+    .outage-rate-card,
+    .subscriber-count-card {
+      height: 9rem;
+      padding: var(--spacing-md);
+      .chart {
+        width: 9rem;
+      }
+    }
+  }
+
+  @include respond-to("md") {
+    .dashboard-map-container {
+      flex: 2.5 1 0;
+      min-height: 420px;
+      padding: var(--spacing-md);
+    }
+
+    .outage-rate-card,
+    .subscriber-count-card {
+      height: 8rem;
+      padding: var(--spacing-sm);
+      .chart {
+        width: 8rem;
+      }
+    }
+  }
+}

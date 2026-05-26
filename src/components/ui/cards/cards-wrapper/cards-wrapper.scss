@@ -1,0 +1,38 @@
+@use "/src/assets/styles/mixins" as *;
+
+.cards-wrapper {
+  display: grid;
+  align-self: stretch;
+  gap: var(--spacing-xl);
+  grid-column: span 12;
+  @include grid-layout(4);
+
+  &-notification-outage {
+    @include grid-layout(3);
+  }
+  &-unplanned-outage {
+    @include grid-layout(3);
+  }
+  &-dashboard {
+    // 4 columns on wide screens, drop to 2 columns at `lg`, and 1 at `md`
+    @include grid-layout(4, "lg", 2);
+    @include respond-to("md") {
+      @include grid-layout(1);
+    }
+  }
+  &-subs {
+    @include grid-layout(2);
+    @include respond-to("xl") {
+      @include grid-layout(2);
+    }
+  }
+  &-settings-sms-cards {
+    @include grid-layout(3, "xl", 2);
+  }
+  &-settings-user-cards {
+    @include grid-layout(2, "xl", 2);
+  }
+  &-settings-data-cards {
+    @include grid-layout(3, "xl", 2);
+  }
+}
